@@ -11,7 +11,7 @@
             align-items: center;
             justify-content: center;
             background: linear-gradient(135deg, #ff758c, #ff7eb3);
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Comic Sans MS', cursive;
             overflow: hidden;
         }
 
@@ -81,9 +81,19 @@
             0% { transform: translateY(0); opacity: 1; }
             100% { transform: translateY(-120px); opacity: 0; }
         }
+
+        .confetti {
+            position: absolute;
+            font-size: 20px;
+        }
     </style>
 </head>
 <body>
+
+<!-- Background music -->
+<audio autoplay loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+</audio>
 
 <div class="card">
     <h1>Kahna 💘</h1>
@@ -98,9 +108,12 @@
         💞 I knew it, Kahna! 💞<br>
         You’re stuck with me forever 😌❤️
     </div>
+
+    <button onclick="loveLetter()" style="margin-top: 20px; background:#ff9ccf; color:white; border-radius:20px; padding:10px 20px; font-size:16px; border:none; cursor:pointer;">Open Love Letter ✉️</button>
 </div>
 
 <script>
+    // Move No button
     function moveNo() {
         const noBtn = document.getElementById("noBtn");
         const x = Math.random() * 220 - 110;
@@ -108,12 +121,15 @@
         noBtn.style.transform = `translate(${x}px, ${y}px)`;
     }
 
+    // Click Yes button
     function yesClicked() {
         document.querySelector(".buttons").style.display = "none";
         document.getElementById("love").style.display = "block";
         createHearts();
+        createConfetti();
     }
 
+    // Floating hearts
     function createHearts() {
         for (let i = 0; i < 15; i++) {
             const heart = document.createElement("div");
@@ -122,11 +138,32 @@
             heart.style.left = Math.random() * 100 + "%";
             heart.style.animationDuration = (Math.random() * 2 + 3) + "s";
             document.body.appendChild(heart);
-
             setTimeout(() => heart.remove(), 4000);
         }
+    }
+
+    // Confetti animation
+    function createConfetti() {
+        const colors = ["🎉","💖","💘","💞","💝"];
+        for (let i = 0; i < 50; i++) {
+            const confetti = document.createElement("div");
+            confetti.className = "confetti";
+            confetti.innerHTML = colors[Math.floor(Math.random()*colors.length)];
+            confetti.style.left = Math.random() * window.innerWidth + "px";
+            confetti.style.top = Math.random() * window.innerHeight + "px";
+            confetti.style.fontSize = Math.random() * 30 + 15 + "px";
+            document.body.appendChild(confetti);
+            setTimeout(() => confetti.remove(), 4000);
+        }
+    }
+
+    // Love letter pop-up
+    function loveLetter() {
+        alert("Kahna, you’re my everything 💖💌 I love you forever!");
     }
 </script>
 
 </body>
 </html>
+
+
